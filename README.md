@@ -2,26 +2,25 @@
 
 Neovim with thoughtful defaults
 
-## Requirements
-
-- macOS
-- Neovim 0.12+
-- [ripgrep](https://github.com/BurntSushi/ripgrep) and [fd](https://github.com/sharkdp/fd) for project search and explorer filtering: `brew install ripgrep fd`
-
 ## Install
 
+Requires macOS, [Homebrew](https://brew.sh), and a [Nerd Font](https://www.nerdfonts.com) in your terminal for icons.
+
 ```sh
-./install.sh
-source ~/.zshrc
+brew install drewradcliff/tap/wok
 ```
 
-The installer:
-
-- links `config/` to `~/.config/wok`
-- adds a `wok` alias to your shell
-- installs plugins (pinned in `config/nvim-pack-lock.json`)
+This brings Neovim, [ripgrep](https://github.com/BurntSushi/ripgrep), and [fd](https://github.com/sharkdp/fd) with it. Plugins install the first time you run `wok`.
 
 wok runs under `NVIM_APPNAME=wok`, so it never touches your existing `nvim` setup.
+
+## Upgrade
+
+```sh
+brew upgrade wok
+```
+
+Plugins are pinned with each release and move to the new versions the next time you open wok.
 
 ## Languages
 
@@ -75,5 +74,29 @@ Problems appear at the end of the line, and the line number turns red or yellow.
 
 In the explorer: `a` add, `r` rename, `d` delete (to trash), `c` copy, `m` move, `o` open with default app, `/` filter, `?` all keys.
 
-To update plugins, run `:lua vim.pack.update()`.
+## Your settings
+
+Put your own settings in `~/.config/wok.lua`. It runs after wok's, and upgrades never touch it.
+
+```lua
+vim.opt.relativenumber = true
+vim.keymap.set("n", "<leader>q", "<Cmd>quit<CR>", { desc = "Quit" })
+```
+
+## Uninstall
+
+```sh
+brew uninstall wok
+rm -rf ~/.config/wok ~/.local/share/wok ~/.local/state/wok ~/.cache/wok
+```
+
+## Development
+
+Run wok from a checkout by putting its `bin/wok` on your `PATH`; it links `~/.config/wok` to the checkout's `config/`:
+
+```sh
+ln -s "$PWD/bin/wok" ~/.local/bin/wok
+```
+
+To bump plugins, run `:lua vim.pack.update()` in wok and commit `config/nvim-pack-lock.json`.
 
