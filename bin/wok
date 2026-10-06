@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# wok: Neovim with thoughtful defaults. Takes any nvim arguments.
+# Upgrade with `brew upgrade wok`; plugins move to the new pins on next launch.
+set -euo pipefail
+
+ROOT="$(dirname "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")")"
+case "$ROOT" in
+  # Homebrew: use the opt/ path, which stays the same across upgrades.
+  */Cellar/wok/*) CONFIG="${ROOT%/Cellar/*}/opt/wok/share/wok" ;;
+  # Running from a checkout of the repo.
+  *) CONFIG="$ROOT/config" ;;
+esac
+TARGET="${XDG_CONFIG_HOME:-$HOME/.config}/wok"
+
+case "${1:-}" in
+  --version | -v)
+    echo "wok $(cat "$CONFIG/VERSION")"
+    exec nvim --version
+    ;;
+esac
+
+# wok runs as NVIM_APPNAME=wok, which reads its config from ~/.config/wok.
+if [ "$(readlink "$TARGET" 2>/dev/null || true)" != "$CONFIG" ]; then
+  if [ -e "$TARGET" ] && [ ! -L "$TARGET" ]; then
+    echo "wok: $TARGET exists and is not a link; move it aside and try again" >&2
+    exit 1
+  fi
+  mkdir -p "$(dirname "$TARGET")"
+  ln -sfn "$CONFIG" "$TARGET"
+fi
+
+export NVIM_APPNAME=wok
+exec nvim "$@"
