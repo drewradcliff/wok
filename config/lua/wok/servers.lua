@@ -254,9 +254,9 @@ local function download(name, on_done)
   local function progress(status, text, percent, hl)
     vim.api.nvim_echo({ { text, hl } }, status ~= "running", {
       kind = "progress",
-      id = "orchard.servers." .. name,
-      source = "orchard",
-      title = "Orchard",
+      id = "wok.servers." .. name,
+      source = "wok",
+      title = "wok",
       status = status,
       percent = percent,
     })
@@ -283,7 +283,7 @@ local function download(name, on_done)
       failed[name] = true
       vim.fn.delete(dir, "rf")
       local reason = vim.split(tostring(err), "\n")[1]
-      progress("failed", ("Couldn't set up %s; Orchard will try again next launch. %s"):format(spec.label, reason), nil, "ErrorMsg")
+      progress("failed", ("Couldn't set up %s; wok will try again next launch. %s"):format(spec.label, reason), nil, "ErrorMsg")
     end
     local callbacks = pending[name]
     pending[name] = nil

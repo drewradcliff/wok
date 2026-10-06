@@ -12,6 +12,6 @@ vim.pack.add({
 }, { confirm = false })
 
 require("which-key").setup({ preset = "helix" })
-require("orchard.picker")
-require("orchard.git")
-require("orchard.lsp")
+require("wok.picker")
+require("wok.git")
+require("wok.lsp")

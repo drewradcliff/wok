@@ -1,7 +1,7 @@
 -- Quick-open pickers use a compact search panel; the rest show a preview.
 local quick = { smart = true, files = true, git_files = true, recent = true, buffers = true }
 
--- Opening a directory (`orch .`) cds into it and starts on an empty buffer
+-- Opening a directory (`wok .`) cds into it and starts on an empty buffer
 -- instead of netrw or the explorer.
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

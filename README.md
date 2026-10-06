@@ -1,4 +1,4 @@
-# orchard
+# wok
 
 Neovim with thoughtful defaults
 
@@ -17,15 +17,15 @@ source ~/.zshrc
 
 The installer:
 
-- links `config/` to `~/.config/orchard`
-- adds an `orch` alias to your shell
+- links `config/` to `~/.config/wok`
+- adds a `wok` alias to your shell
 - installs plugins (pinned in `config/nvim-pack-lock.json`)
 
-orchard runs under `NVIM_APPNAME=orchard`, so it never touches your existing `nvim` setup.
+wok runs under `NVIM_APPNAME=wok`, so it never touches your existing `nvim` setup.
 
 ## Languages
 
-Errors, warnings, and types just work. The first time you open a file in a language, its server downloads in the background and attaches when it's ready. Servers live in `~/.local/share/orchard/servers`, pinned to the versions Orchard ships with.
+Errors, warnings, and types just work. The first time you open a file in a language, its server downloads in the background and attaches when it's ready. Servers live in `~/.local/share/wok/servers`, pinned to the versions wok ships with.
 
 | Language | Server |
 | --- | --- |
@@ -42,7 +42,7 @@ A server you installed yourself, in the project or on your `PATH`, takes precede
 ## Usage
 
 ```sh
-orch .
+wok .
 ```
 
 Opening a folder shows the file explorer. `<leader>` is `Space`

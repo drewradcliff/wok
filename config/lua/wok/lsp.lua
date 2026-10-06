@@ -163,7 +163,7 @@ vim.lsp.config("vtsls", {
   },
 })
 
-require("orchard.servers").setup()
+require("wok.servers").setup()
 
 vim.lsp.enable({
   "lua_ls",

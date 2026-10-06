@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Links this repo's config into ~/.config/orchard and adds the `orch` alias.
+# Links this repo's config into ~/.config/wok and adds the `wok` alias.
 # Safe to run more than once.
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APPNAME="orchard"
+APPNAME="wok"
 TARGET="${XDG_CONFIG_HOME:-$HOME/.config}/$APPNAME"
 
 mkdir -p "$(dirname "$TARGET")"
@@ -24,9 +24,9 @@ case "$(basename "${SHELL:-}")" in
   *) RC="$HOME/.profile" ;;
 esac
 
-ALIAS="alias orch='NVIM_APPNAME=$APPNAME nvim'"
+ALIAS="alias wok='NVIM_APPNAME=$APPNAME nvim'"
 if ! grep -qF "$ALIAS" "$RC" 2>/dev/null; then
-  printf '\n# orchard\n%s\n' "$ALIAS" >>"$RC"
+  printf '\n# wok\n%s\n' "$ALIAS" >>"$RC"
   echo "added alias to $RC (run: source $RC)"
 else
   echo "alias already present in $RC"

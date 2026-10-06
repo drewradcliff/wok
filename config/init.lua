@@ -1,13 +1,13 @@
--- Orchard: a thoughtfully configured Neovim.
+-- wok: a thoughtfully configured Neovim.
 
 vim.loader.enable()
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-require("orchard.options")
-vim.cmd.colorscheme("orchard")
-require("orchard.highlights")
-require("orchard.plugins")
-require("orchard.keymaps")
-require("orchard.autocmds")
+require("wok.options")
+vim.cmd.colorscheme("wok")
+require("wok.highlights")
+require("wok.plugins")
+require("wok.keymaps")
+require("wok.autocmds")

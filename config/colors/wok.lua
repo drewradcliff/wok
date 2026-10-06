@@ -3,7 +3,7 @@
 -- terminal and updates live when the terminal switches appearance.
 
 vim.cmd.highlight("clear")
-vim.g.colors_name = "orchard"
+vim.g.colors_name = "wok"
 
 local palettes = {
   light = {

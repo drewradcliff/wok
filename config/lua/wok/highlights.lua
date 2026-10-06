@@ -1,8 +1,8 @@
 -- Floats and popup menus share the editor background so rounded borders
--- don't leave square corners of a different color. The Orchard colorscheme
+-- don't leave square corners of a different color. The wok colorscheme
 -- already does this; the fallback is for any other colorscheme.
 local function apply()
-  if vim.g.colors_name == "orchard" then
+  if vim.g.colors_name == "wok" then
     return
   end
   local get = function(name)
@@ -20,7 +20,7 @@ end
 apply()
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  group = vim.api.nvim_create_augroup("orchard.highlights", { clear = true }),
-  desc = "Reapply Orchard float styling",
+  group = vim.api.nvim_create_augroup("wok.highlights", { clear = true }),
+  desc = "Reapply wok float styling",
   callback = apply,
 })

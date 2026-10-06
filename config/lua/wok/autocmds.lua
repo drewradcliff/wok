@@ -1,4 +1,4 @@
-local group = vim.api.nvim_create_augroup("orchard", { clear = true })
+local group = vim.api.nvim_create_augroup("wok", { clear = true })
 local autocmd = function(event, opts)
   vim.api.nvim_create_autocmd(event, vim.tbl_extend("force", { group = group }, opts))
 end
