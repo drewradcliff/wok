@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  startup:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install Neovim and ShellCheck
+        run: brew install neovim shellcheck
+
+      - name: Lint bin/wok
+        run: shellcheck bin/wok
+
+      # Neovim exits 0 even when init.lua fails, so check v:errmsg ourselves.
+      # The first run is a fresh install; the second is a normal startup.
+      # /bin/bash is macOS's bash 3.2, the oldest bin/wok has to run on.
+      - name: Start wok from a clean install
+        run: |
+          export XDG_CONFIG_HOME="$RUNNER_TEMP/config" XDG_DATA_HOME="$RUNNER_TEMP/data"
+          export XDG_STATE_HOME="$RUNNER_TEMP/state" XDG_CACHE_HOME="$RUNNER_TEMP/cache"
+          for run in install startup; do
+            echo "::group::$run"
+            /bin/bash bin/wok --headless \
+              "+lua if vim.v.errmsg ~= '' then io.stderr:write(vim.v.errmsg, '\n') vim.cmd.cquit() end" +qa
+            echo "::endgroup::"
+          done
+          /bin/bash bin/wok --version
+
+      - name: Lockfile matches the plugins wok adds
+        run: git diff --exit-code config/nvim-pack-lock.json
