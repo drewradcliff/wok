@@ -2,7 +2,7 @@
 -- from nvim-lspconfig; each one starts only if its binary is installed.
 local severity = vim.diagnostic.severity
 
--- Nerd Font glyphs: circled x, triangle, circled i, lightbulb.
+-- circled x, triangle, circled i, lightbulb.
 local icons = {
   [severity.ERROR] = "\u{F057}",
   [severity.WARN] = "\u{F071}",
