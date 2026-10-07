@@ -10,6 +10,11 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true
 map({ "n", "i", "x" }, "<C-s>", "<Cmd>write<CR><Esc>", { desc = "Save" })
 map({ "n", "i", "x" }, "<D-s>", "<Cmd>write<CR><Esc>", { desc = "Save" })
 
+-- Delete a word or to the start of the line like other apps.
+map({ "i", "c" }, "<M-BS>", "<C-w>", { desc = "Delete word" })
+map({ "i", "c" }, "<C-BS>", "<C-w>", { desc = "Delete word" })
+map({ "i", "c" }, "<D-BS>", "<C-u>", { desc = "Delete to start of line" })
+
 map("n", "<C-h>", "<C-w>h", { desc = "Focus left window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Focus lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Focus upper window" })
