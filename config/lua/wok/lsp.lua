@@ -48,6 +48,29 @@ vim.diagnostic.config({
   },
 })
 
+-- Completions come from the language server as you type, replacing the
+-- buffer-word menu. Accepting one also applies its auto-import and snippet.
+local word_chars = {}
+for char in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"):gmatch(".") do
+  word_chars[#word_chars + 1] = char
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("wok.completion", { clear = true }),
+  callback = function(args)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    local provider = client.server_capabilities.completionProvider
+    if not provider then
+      return
+    end
+    -- Servers only list characters like "." as triggers; add every word
+    -- character so the menu opens while typing a name, too.
+    provider.triggerCharacters = vim.list_extend(vim.deepcopy(provider.triggerCharacters or {}), word_chars)
+    vim.bo[args.buf].autocomplete = false
+    vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+  end,
+})
+
 -- Lua in this config is checked against the Neovim API and installed plugins.
 local config_dir = vim.uv.fs_realpath(vim.fn.stdpath("config"))
 local lua_ls = assert(vim.lsp.config.lua_ls)

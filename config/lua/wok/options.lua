@@ -56,10 +56,11 @@ opt.swapfile = false
 opt.updatetime = 250
 opt.timeoutlen = 400
 
--- Insert-mode completion appears as you type.
+-- Insert-mode completion appears as you type, with the first match highlighted
+-- Tab or Enter accepts it
 opt.autocomplete = true
 opt.complete = ".,w,b,u"
-opt.completeopt = { "menuone", "noselect", "popup", "fuzzy" }
+opt.completeopt = { "menuone", "noinsert", "popup", "fuzzy" }
 
 -- Command-line completion appears as you type (see autocmds).
 opt.wildmode = "noselect:lastused,full"

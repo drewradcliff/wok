@@ -15,6 +15,23 @@ map({ "i", "c" }, "<M-BS>", "<C-w>", { desc = "Delete word" })
 map({ "i", "c" }, "<C-BS>", "<C-w>", { desc = "Delete word" })
 map({ "i", "c" }, "<D-BS>", "<C-u>", { desc = "Delete to start of line" })
 
+-- Tab or Enter accepts the highlighted completion, like VS Code. With nothing
+-- highlighted they type as usual, and Tab still jumps through snippet fields.
+local function completion_selected()
+  return vim.fn.pumvisible() == 1 and vim.fn.complete_info({ "selected" }).selected ~= -1
+end
+map("i", "<Tab>", function()
+  if completion_selected() then
+    return "<C-y>"
+  elseif vim.snippet.active({ direction = 1 }) then
+    return "<Cmd>lua vim.snippet.jump(1)<CR>"
+  end
+  return "<Tab>"
+end, { expr = true, desc = "Accept completion" })
+map("i", "<CR>", function()
+  return completion_selected() and "<C-y>" or "<CR>"
+end, { expr = true, desc = "Accept completion" })
+
 map("n", "<C-h>", "<C-w>h", { desc = "Focus left window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Focus lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Focus upper window" })

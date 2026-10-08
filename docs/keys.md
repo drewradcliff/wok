@@ -42,6 +42,9 @@
 | `Cmd-S` / `Ctrl-S` | Save |
 | `Option-Backspace` / `Ctrl-Backspace` | Delete the previous word (insert mode and command line) |
 | `Cmd-Backspace` | Delete to the start of the line (insert mode and command line) |
+| `Tab` / `Enter` | Accept the highlighted suggestion |
+| `Ctrl-n` / `Ctrl-p` or `Down` / `Up` | Highlight the next / previous suggestion |
+| `Ctrl-e` | Dismiss suggestions |
 | `gcc` / `gc` | Comment line / selection |
 | `<` / `>` | Indent selection (stays selected) |
 | `Esc` | Clear search highlight |
