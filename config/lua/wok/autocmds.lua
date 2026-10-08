@@ -10,13 +10,6 @@ autocmd("TextYankPost", {
   end,
 })
 
-autocmd("FileType", {
-  desc = "Use treesitter highlighting when a parser is available",
-  callback = function(args)
-    pcall(vim.treesitter.start, args.buf)
-  end,
-})
-
 autocmd("CmdlineChanged", {
   desc = "Show command-line completions as you type",
   pattern = ":",

@@ -283,7 +283,7 @@ local function download(name, on_done)
       failed[name] = true
       vim.fn.delete(dir, "rf")
       local reason = vim.split(tostring(err), "\n")[1]
-      progress("failed", ("Couldn't set up %s; wok will try again next launch. %s"):format(spec.label, reason), nil, "ErrorMsg")
+      progress("failed", ("Couldn't set up %s. wok will try again next launch. %s"):format(spec.label, reason), nil, "ErrorMsg")
     end
     local callbacks = pending[name]
     pending[name] = nil

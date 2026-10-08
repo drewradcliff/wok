@@ -1,9 +1,15 @@
 ## Development
 
-Run wok from a checkout by putting its `bin/wok` on your `PATH`; it links `~/.config/wok` to the checkout's `config/`:
+Run wok from a checkout by putting its `bin/wok` on your `PATH`. It links `~/.config/wok` to the checkout's `config/`:
 
 ```sh
 ln -s "$PWD/bin/wok" ~/.local/bin/wok
+```
+
+Install dependencies:
+
+```sh
+brew install neovim ripgrep fd tree-sitter-cli
 ```
 
 To bump plugins, run `:lua vim.pack.update()` in wok and commit `config/nvim-pack-lock.json`.

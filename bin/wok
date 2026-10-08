@@ -22,7 +22,7 @@ esac
 # wok runs as NVIM_APPNAME=wok, which reads its config from ~/.config/wok.
 if [ "$(readlink "$TARGET" 2>/dev/null || true)" != "$CONFIG" ]; then
   if [ -e "$TARGET" ] && [ ! -L "$TARGET" ]; then
-    echo "wok: $TARGET exists and is not a link; move it aside and try again" >&2
+    echo "wok: $TARGET exists and is not a link. Move it aside and try again" >&2
     exit 1
   fi
   mkdir -p "$(dirname "$TARGET")"

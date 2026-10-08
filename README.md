@@ -35,7 +35,7 @@ See [all keys](docs/keys.md)
 
 ## Languages
 
-The first time you open a file in a language, its server downloads in the background and attaches when it's ready.
+The first time you open a file in a language, its server and syntax highlighting download in the background.
 
 | Language | Support |
 | --- | --- |
