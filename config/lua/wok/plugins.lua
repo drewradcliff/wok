@@ -38,6 +38,7 @@ require("which-key").setup({ preset = "helix" })
 require("wok.picker")
 require("wok.git")
 require("wok.lsp")
+require("wok.format")
 require("wok.treesitter")
 
 -- Parsers are pinned by nvim-treesitter, so rebuild any that its new revision

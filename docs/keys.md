@@ -72,6 +72,8 @@
 | `grn` | Rename |
 | `]d` / `[d` | Next / previous problem, with its full message |
 | `Space s d` | All problems |
+| `Space c f` | Format the file |
+| `Space t f` | Toggle format on save |
 | `Space t h` | Toggle inline type hints |
 
 ## Git
