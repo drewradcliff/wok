@@ -29,7 +29,10 @@ map("i", "<Tab>", function()
   return "<Tab>"
 end, { expr = true, desc = "Accept completion" })
 map("i", "<CR>", function()
-  return completion_selected() and "<C-y>" or "<CR>"
+  if completion_selected() then
+    return "<C-y>"
+  end
+  return require("wok.autopairs").enter() or "<CR>"
 end, { expr = true, desc = "Accept completion" })
 
 map("n", "<C-h>", "<C-w>h", { desc = "Focus left window" })

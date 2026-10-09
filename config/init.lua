@@ -22,6 +22,7 @@ vim.cmd.colorscheme("wok")
 require("wok.highlights")
 require("wok.plugins")
 require("wok.keymaps")
+require("wok.autopairs")
 require("wok.autocmds")
 
 -- Your own settings live outside wok, so upgrades never touch them.
