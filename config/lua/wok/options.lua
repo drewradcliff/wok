@@ -70,9 +70,8 @@ opt.completeopt = { "menuone", "noinsert", "popup", "fuzzy" }
 opt.wildmode = "noselect:lastused,full"
 opt.wildoptions = { "pum", "fuzzy" }
 
--- Folding: treesitter-aware, everything open by default.
-opt.foldmethod = "expr"
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- Folding: everything open by default. Folds come from tree-sitter, set per
+-- buffer when highlighting starts (see treesitter.lua).
 opt.foldtext = ""
 opt.foldlevelstart = 99
 

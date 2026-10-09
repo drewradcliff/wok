@@ -32,6 +32,19 @@ local function progress(lang, status, text, hl)
   })
 end
 
+-- Starts highlighting and folding. Folds are set only where there's a parser:
+-- Neovim never clears the fold state of a parserless buffer that's wiped
+-- inside an autocmd (as codediff's are), and errors on it later.
+local function start(buf, lang)
+  if not pcall(vim.treesitter.start, buf, lang) then
+    return
+  end
+  for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+    vim.wo[win][0].foldmethod = "expr"
+    vim.wo[win][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  end
+end
+
 local pending, failed = {}, {}
 
 -- Installs parsers, then restarts highlighting in every buffer that was
@@ -148,7 +161,7 @@ vim.api.nvim_create_autocmd("FileType", {
       -- start highlighting when they're ready (the regex syntax shows meanwhile).
       local missing = missing_injections(args.buf, lang)
       if #missing == 0 or not install(missing, args.buf) then
-        pcall(vim.treesitter.start, args.buf, lang)
+        start(args.buf, lang)
       end
     elseif available[lang] then
       install({ lang }, args.buf)
