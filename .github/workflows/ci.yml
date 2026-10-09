@@ -32,5 +32,16 @@ jobs:
           done
           /bin/bash bin/wok --version
 
+      # Opening a file is what downloads and starts its server, so do it for real.
+      - name: A language server attaches to a TypeScript file
+        run: |
+          export XDG_CONFIG_HOME="$RUNNER_TEMP/config" XDG_DATA_HOME="$RUNNER_TEMP/data"
+          export XDG_STATE_HOME="$RUNNER_TEMP/state" XDG_CACHE_HOME="$RUNNER_TEMP/cache"
+          mkdir "$RUNNER_TEMP/project"
+          printf 'const greeting: string = "hi";\n' > "$RUNNER_TEMP/project/index.ts"
+          cd "$RUNNER_TEMP/project"
+          /bin/bash "$GITHUB_WORKSPACE/bin/wok" --headless index.ts \
+            "+luafile $GITHUB_WORKSPACE/.github/lsp-attach.lua"
+
       - name: Lockfile matches the plugins wok adds
         run: git diff --exit-code config/nvim-pack-lock.json
