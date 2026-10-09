@@ -38,6 +38,7 @@ require("which-key").setup({ preset = "helix" })
 require("wok.picker")
 require("wok.git")
 require("wok.lsp")
+require("wok.signature")
 require("wok.format")
 require("wok.treesitter")
 
