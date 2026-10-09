@@ -1,7 +1,11 @@
 local opt = vim.opt
 
--- Messages & command line: no "Press ENTER" prompts.
-require("vim._core.ui2").enable({})
+-- Messages & command line: no "Press ENTER" prompts. ui2 is still a private
+-- module, so if a Neovim release moves it, keep the classic message area
+-- rather than failing to start.
+pcall(function()
+  require("vim._core.ui2").enable({})
+end)
 
 -- Interface
 opt.number = true
