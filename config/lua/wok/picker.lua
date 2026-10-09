@@ -128,6 +128,17 @@ map("n", "<leader>e", function()
   Snacks.explorer()
 end, "Toggle file explorer")
 
+-- A terminal panel at the bottom. Hiding it keeps the shell
+-- running. Without the kitty keyboard protocol, terminals send Ctrl-` as
+-- Ctrl-@, so both work; Space t t is there for terminals that send neither.
+local function terminal()
+  Snacks.terminal()
+end
+for _, key in ipairs({ "<C-`>", "<C-@>" }) do
+  vim.keymap.set({ "n", "i", "t" }, key, terminal, { desc = "Toggle terminal" })
+end
+map("n", "<leader>tt", terminal, "Terminal")
+
 -- Find
 map("n", "<leader>ff", pick("files"), "Files")
 map("n", "<leader>fr", pick("recent"), "Recent files")

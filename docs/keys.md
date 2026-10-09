@@ -55,6 +55,7 @@
 | --- | --- |
 | `Ctrl-h` `Ctrl-j` `Ctrl-k` `Ctrl-l` | Move to the window left / below / above / right |
 | `q` | Close help, quickfix, and other transient windows |
+| ``Ctrl-` `` / `Space t t` | Open or hide the terminal |
 | `Esc Esc` | Leave terminal mode |
 
 ## Code and problems
