@@ -35,6 +35,9 @@ map("i", "<CR>", function()
   return require("wok.autopairs").enter() or "<CR>"
 end, { expr = true, desc = "Accept completion" })
 
+-- Ask the language server for completions without typing first, like VS Code.
+map("i", "<C-Space>", vim.lsp.completion.get, { desc = "Show completions" })
+
 map("n", "<C-h>", "<C-w>h", { desc = "Focus left window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Focus lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Focus upper window" })
