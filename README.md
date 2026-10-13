@@ -2,8 +2,6 @@
 
 Neovim without the config.
 
-Most Neovim distros give you a config to make your own. wok takes the opposite approach: the configuration is part of the product.
-
 Install it, open a project, and use it. Plugins, language servers, defaults, and upgrades are maintained together and shipped as releases.
 
 ```sh
