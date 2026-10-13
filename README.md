@@ -15,8 +15,8 @@ wok .
 
 - **Upgrades like an app.** `brew upgrade wok` when there's a new release.
 - **Neovim-first.** Uses Neovim 0.12's plugin manager, completion, and LSP support, with a deliberately small plugin set.
-- **Languages work automatically.** Open a supported project and wok installs the appropriate language server without requiring Mason.
-- **Made for macOS.** System clipboard, Trash, default-app opening, mouse support, and native-feeling behavior are configured out of the box. 
+- **Languages just work.** Open a supported project and wok installs the appropriate language server without requiring Mason.
+- **Native feeling.** Configured out of the box. Focused on macOS for now.
 - **Code review built in.** Review working-tree changes without leaving the editor.
 
 | Key | Action |
