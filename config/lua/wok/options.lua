@@ -12,8 +12,11 @@ opt.number = true
 opt.cursorline = true
 opt.signcolumn = "yes"
 opt.laststatus = 3
-opt.winborder = "rounded"
-opt.pumborder = "rounded"
+-- Floats and menus sit on their own background, padded by a blank border. A
+-- rounded border is drawn through the middle of its cells, so it can't sit
+-- cleanly on a background of another color, like a selection.
+opt.winborder = "solid"
+opt.pumborder = "solid"
 opt.pumheight = 10
 opt.fillchars = { eob = " ", fold = " " }
 opt.list = true

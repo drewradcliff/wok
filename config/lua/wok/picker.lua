@@ -17,6 +17,34 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
+-- The explorer sits beside the editor rather than over it, so it shares the
+-- editor background and floating pickers stand out against it. Snacks sets
+-- each picker window's highlights itself and restores them from the layout
+-- whenever it updates, so both copies are overridden once the explorer shows.
+local editor_hl = {
+  Normal = "Normal",
+  NormalNC = "Normal",
+  NormalFloat = "Normal",
+  FloatBorder = "WinSeparator",
+  FloatTitle = "Title",
+}
+local function editor_background(picker)
+  local layout = picker.layout
+  local function override(opts)
+    opts.wo = opts.wo or {}
+    opts.wo.winhighlight = Snacks.util.winhl(opts.wo.winhighlight, editor_hl)
+  end
+  for _, saved in pairs(layout.win_opts) do
+    override(saved)
+  end
+  for _, win in pairs(vim.list_extend(vim.tbl_values(layout.wins), vim.tbl_values(layout.box_wins))) do
+    override(win.opts)
+    if win:valid() then
+      Snacks.util.wo(win.win, { winhighlight = win.opts.wo.winhighlight })
+    end
+  end
+end
+
 require("snacks").setup({
   -- Keep the explorer closed on startup; toggle it with its keymap.
   explorer = { replace_netrw = false },
@@ -88,6 +116,7 @@ require("snacks").setup({
       explorer = {
         -- Stays out of the way until you press / to filter.
         layout = { auto_hide = { "input" }, layout = { width = 32, min_width = 32 } },
+        on_show = editor_background,
       },
     },
   },

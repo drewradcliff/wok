@@ -34,7 +34,11 @@ local function sync_plugins()
 end
 local synced = sync_plugins()
 
-require("which-key").setup({ preset = "helix" })
+require("which-key").setup({
+  preset = "helix",
+  -- Match the other floats (see 'winborder').
+  win = { border = "solid" },
+})
 require("wok.picker")
 require("wok.git")
 require("wok.lsp")

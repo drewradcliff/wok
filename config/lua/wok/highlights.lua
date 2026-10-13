@@ -1,20 +1,28 @@
--- Floats and popup menus share the editor background so rounded borders
--- don't leave square corners of a different color. The wok colorscheme
--- already does this; the fallback is for any other colorscheme.
+local get = function(name)
+  return vim.api.nvim_get_hl(0, { name = name, link = false })
+end
+
+-- Floats and popup menus sit on their own background, padded by a blank
+-- border (see 'winborder'). The wok colorscheme already does this; the
+-- fallback is for any other colorscheme, borrowing the cursor line color when
+-- floats would otherwise blend into the editor.
 local function apply()
   if vim.g.colors_name == "wok" then
     return
   end
-  local get = function(name)
-    return vim.api.nvim_get_hl(0, { name = name, link = false })
+  local normal = get("Normal").bg
+  local function surface(name)
+    local bg = get(name).bg
+    return (bg and bg ~= normal) and bg or get("CursorLine").bg
   end
-  local bg = get("Normal").bg
-  local border = { fg = get("NonText").fg, bg = bg }
 
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = bg })
-  vim.api.nvim_set_hl(0, "FloatBorder", border)
-  vim.api.nvim_set_hl(0, "Pmenu", { bg = bg })
-  vim.api.nvim_set_hl(0, "PmenuBorder", border)
+  local float = surface("NormalFloat")
+  vim.api.nvim_set_hl(0, "NormalFloat", vim.tbl_extend("force", get("NormalFloat"), { bg = float }))
+  vim.api.nvim_set_hl(0, "FloatBorder", vim.tbl_extend("force", get("FloatBorder"), { bg = float }))
+
+  local menu = surface("Pmenu")
+  vim.api.nvim_set_hl(0, "Pmenu", vim.tbl_extend("force", get("Pmenu"), { bg = menu }))
+  vim.api.nvim_set_hl(0, "PmenuBorder", vim.tbl_extend("force", get("PmenuBorder"), { bg = menu }))
 end
 
 apply()
